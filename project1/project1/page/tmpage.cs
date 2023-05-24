@@ -27,15 +27,15 @@ namespace project1.page
             
             // input code
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
-            codeTextbox.SendKeys("3ESP");
+            codeTextbox.SendKeys("3ES");
             
             // input description
             IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
-            descriptionTextbox.SendKeys("3ES");
+            descriptionTextbox.SendKeys("RAJA");
             
             // input price per unit
             IWebElement priceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            priceTextbox.SendKeys("666");
+            priceTextbox.SendKeys("66");
             Thread.Sleep(2000);
            
             // click on save button
@@ -88,14 +88,17 @@ namespace project1.page
             IWebElement mpriceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
             mpriceTextbox.SendKeys("2479");
             Thread.Sleep(2000);
+            
             // click on save button
             IWebElement msaveButton = driver.FindElement(By.Id("SaveButton"));
             msaveButton.Click();
+
             // check material record saved
             Console.WriteLine("Material record saved...");
             Thread.Sleep(3000);
             IWebElement GoToLastPageButtonAfterAddMaterial = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             GoToLastPageButtonAfterAddMaterial.Click();
+            
             //check if the Material record is present in the table
             IWebElement newMaterialcode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
             if (newMaterialcode.Text == "MAT")
@@ -110,18 +113,26 @@ namespace project1.page
 
         public void EditMaterial(IWebDriver driver)
         {
-            // click Edit the last material Record
+            // click Edit the last  Record
             IWebElement lastmaterialRecordButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             lastmaterialRecordButton.Click();
             
-            IWebElement editmCodeTextbox = driver.FindElement(By.Id("Code"));
-            editmCodeTextbox.Clear();
-            editmCodeTextbox.SendKeys("MAT20");
+            IWebElement editMaterialCodeTextbox = driver.FindElement(By.Id("Code"));
+            editMaterialCodeTextbox.Clear();
+            editMaterialCodeTextbox.SendKeys("MAT20");
+
+            IWebElement editDescriptionTextbox = driver.FindElement(By.Id("Description"));
+            editDescriptionTextbox.Clear();
+            editDescriptionTextbox.SendKeys("ELAN");
+
+            IWebElement editPriceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+            editPriceTextbox.Clear();
+            editPriceTextbox.SendKeys("100");
             Thread.Sleep(2000);
             
             // click on save button
-            IWebElement editmSaveButton = driver.FindElement(By.Id("SaveButton"));
-            editmSaveButton.Click();
+            IWebElement editMaterialSaveButton = driver.FindElement(By.Id("SaveButton"));
+            editMaterialSaveButton.Click();
             Console.WriteLine("Editing a record is done");
             
             // Click last Page Button (after editing)
@@ -165,8 +176,18 @@ namespace project1.page
             IWebElement editCodeTextbox = driver.FindElement(By.Id("Code"));
             editCodeTextbox.Clear();
             editCodeTextbox.SendKeys("3ESPEDIT");
+
+            IWebElement editDescriptionTextbox = driver.FindElement(By.Id("Description"));
+            editDescriptionTextbox.Clear();            
+            editDescriptionTextbox.SendKeys("RAJA40");
+
+            \\IWebElement priceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+            \\priceTextboxOverlap.Click();
+            \\IWebElement editPriceTextbox = driver.FindElement(By.Id("Price"));
+            editPriceTextbox.Clear();
+            editPriceTextbox.SendKeys("89");
             Thread.Sleep(2000);
-            
+           
             // click on save button
             IWebElement editSaveButton = driver.FindElement(By.Id("SaveButton"));
             editSaveButton.Click();
