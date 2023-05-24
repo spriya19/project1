@@ -14,6 +14,7 @@ namespace project1.page
             // =========navigate to time and mateial page========
             IWebElement administrationTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
             administrationTab.Click();
+            
             IWebElement tmoptionTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             tmoptionTab.Click();
         }
