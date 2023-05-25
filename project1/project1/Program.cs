@@ -22,18 +22,18 @@ public class Program
         TMPage TimePageObj = new TMPage();
         TimePageObj.CreateTime(driver);
         
+        // clear Time record and edit time record
+        TMPage timePageObj = new TMPage();
+        timePageObj.EditTime(driver);
+      
         // Material page object Identified and create material record
         TMPage materialPageObj = new TMPage();
         materialPageObj.CreateMaterial(driver);
 
-        // clear Time record and edit time record
-        TMPage timePageObj = new TMPage();
-        timePageObj.EditTime(driver);
-
         // clear Material record and edit Material record
         TMPage editMaterialPageObj = new TMPage();
         editMaterialPageObj.EditMaterial(driver);
-
+       
         // Deleteobject Identified and delete the last record
         TMPage deleteLastRecordObj = new TMPage();
         deleteLastRecordObj.DeleteLastRecord(driver);

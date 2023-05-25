@@ -16,7 +16,8 @@ namespace project1.page
             // click create new button
             IWebElement createnewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
             createnewButton.Click();
-            
+
+            // ********************** Create Time Record ************************
             // select Time from dropdown List
             IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[2]/span"));
             typeCodeDropdown.Click();
@@ -125,11 +126,14 @@ namespace project1.page
             editDescriptionTextbox.Clear();
             editDescriptionTextbox.SendKeys("ELAN");
 
-            IWebElement editPriceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+            IWebElement priceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+            IWebElement editPriceTextbox = driver.FindElement(By.Id("Price"));
+            priceTextboxOverlap.Click();
             editPriceTextbox.Clear();
+            priceTextboxOverlap.Click();
             editPriceTextbox.SendKeys("100");
             Thread.Sleep(2000);
-            
+
             // click on save button
             IWebElement editMaterialSaveButton = driver.FindElement(By.Id("SaveButton"));
             editMaterialSaveButton.Click();
@@ -151,22 +155,6 @@ namespace project1.page
                 Console.WriteLine("Material edit record has not been created successfully");
             }
         }
-
-        public void DeleteLastRecord(IWebDriver driver)
-        {
-            // click delete last record
-            Thread.Sleep(3000);
-            IWebElement deleteRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
-            deleteRecord.Click();
-            Thread.Sleep(3000);
-            
-            // To Click OK in altert window
-            driver.SwitchTo().Alert().Accept();
-            
-            // To Click Cancel in alert window, if you dont want to delete
-            driver.SwitchTo().Alert().Dismiss();
-            Console.WriteLine("Last record from the table has been deleted successfully.");
-        }
         public void EditTime(IWebDriver driver)
         {
             // click Edit Time the last Record
@@ -181,10 +169,11 @@ namespace project1.page
             editDescriptionTextbox.Clear();            
             editDescriptionTextbox.SendKeys("RAJA40");
 
-            \\IWebElement priceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            \\priceTextboxOverlap.Click();
-            \\IWebElement editPriceTextbox = driver.FindElement(By.Id("Price"));
+            IWebElement priceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+            IWebElement editPriceTextbox = driver.FindElement(By.Id("Price"));
+            priceTextboxOverlap.Click();
             editPriceTextbox.Clear();
+            priceTextboxOverlap.Click();
             editPriceTextbox.SendKeys("89");
             Thread.Sleep(2000);
            
@@ -193,14 +182,14 @@ namespace project1.page
             editSaveButton.Click();
             Console.WriteLine("Editing a record is done");
             
-            // Click last Page Button (after editing)
+            // Click last Page Button (after editing Time)
             Thread.Sleep(3000);
             IWebElement afterEditGoToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             afterEditGoToLastPageButton.Click();
             
-            //check if the  edit record is present in the table
+            //check if the  edit Time record is present in the table
             IWebElement editCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (editCode.Text == "3ESEDIT")
+            if (editCode.Text == "3ESPEDIT")
             {
                 Console.WriteLine("Time edit record has created and verified succesfully");
             }
@@ -208,6 +197,33 @@ namespace project1.page
             {
                 Console.WriteLine("Time edit record has not been created successfully");
             }
+            
+            
         }
+          public void DeleteLastRecord(IWebDriver driver)
+          {
+            // click delete last record
+            Thread.Sleep(3000);
+
+            IWebElement deleteRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
+            deleteRecord.Click();
+            Thread.Sleep(3000);
+
+            // To Click OK in altert window
+            driver.SwitchTo().Alert().Accept();
+
+            //Check if lastrecord deleted
+            IWebElement lastRecordCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            if (lastRecordCode.Text != "MAT20")
+            {
+                Console.WriteLine("Record deleted successfully");
+            }
+            else
+            {
+                Console.WriteLine("Record has not deleted");
+            }
+
+            Console.WriteLine("Last record from the table has been deleted successfully.");
+          }
     }
 }
