@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using project1.utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,10 @@ namespace project1.page
             
             // check Time Record created successfully
             Console.WriteLine("Record saved successfully...");
-            
+
             // navige to last page
-            Thread.Sleep(3000);
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 6);
+
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             goToLastPageButton.Click();
             Thread.Sleep(4000);
@@ -186,6 +188,7 @@ namespace project1.page
             Thread.Sleep(3000);
             IWebElement afterEditGoToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
             afterEditGoToLastPageButton.Click();
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]", 7);
             
             //check if the  edit Time record is present in the table
             IWebElement editCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
@@ -203,18 +206,18 @@ namespace project1.page
           public void DeleteLastRecord(IWebDriver driver)
           {
             // click delete last record
-            Thread.Sleep(3000);
+            Wait.WaitToBeClickable(driver, "Xpath", "//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]", 5);
 
             IWebElement deleteRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
             deleteRecord.Click();
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
 
             // To Click OK in altert window
             driver.SwitchTo().Alert().Accept();
 
             //Check if lastrecord deleted
             IWebElement lastRecordCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (lastRecordCode.Text != "MAT20")
+            if (lastRecordCode.Text == "MAT20")
             {
                 Console.WriteLine("Record deleted successfully");
             }

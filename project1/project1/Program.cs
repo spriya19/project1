@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V111.IndexedDB;
+using OpenQA.Selenium.Support.UI;
 using project1.page;
 
 public class Program
@@ -37,6 +38,8 @@ public class Program
         // Deleteobject Identified and delete the last record
         TMPage deleteLastRecordObj = new TMPage();
         deleteLastRecordObj.DeleteLastRecord(driver);
+
+       
     }
 }
         

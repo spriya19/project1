@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using project1.utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace project1.page
             // check user has checked successfully
             IWebElement remembermeLable = driver.FindElement(By.Id("RememberMe"));
             remembermeLable.Click();
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"loginForm\"]/form/div[3]/input[1]", 5);
             
             // click longin button
             IWebElement loginButton = driver.FindElement(By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"));
