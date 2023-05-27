@@ -10,7 +10,7 @@ namespace project1.utilities
 {
     public class Wait
     {
-        public static void WaitToBeClickable(IWebDriver driver, string locatorType, string locatorValue, int seconds)
+        public static void WaitToBeExists(IWebDriver driver, string locatorType, string locatorValue, int seconds)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
 
@@ -28,10 +28,10 @@ namespace project1.utilities
             }
 
         }
-        public static void WaitToBeExist(IWebDriver driver, string locatorType, string locatorValue, int seconds)
+        public static void WaitToExist(IWebDriver driver, string locatorType, string locatorValue, int seconds)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("")));
+            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("")));
 
             if (locatorType == "XPath")
             {
@@ -47,5 +47,6 @@ namespace project1.utilities
             }
 
         }
+
     }
 }

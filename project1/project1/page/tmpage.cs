@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using project1.utilities;
 using System;
@@ -7,226 +8,85 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace project1.page
 {
-    public class TMPage
+    public class TMPage : CommonDriver
     {
-        public void CreateTime(IWebDriver driver)
+        /*public static IWebElement createnewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
+        public static IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[2]/span"));
+        public static IWebElement option = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
+        public static IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
+        public static IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
+        public static IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+        public static IWebElement priceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+        public static IWebElement createnewButton4Material = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
+        public static IWebElement typeCodeDropdown4Material = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[2]/span"));
+        public static IWebElement saveRecord = driver.FindElement(By.Id("SaveButton"));
+        public static IWebElement createM = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[1]"));
+        public static IWebElement newtimecode = driver.FindElement(By.XPath(".//td[contains(.,'3ES')]"));
+        public static IWebElement newMaterialcode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+        */
+        public void ClickCreateNew(IWebDriver driver)
         {
-            // click create new button
             IWebElement createnewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
             createnewButton.Click();
+        }
 
-            // ********************** Create Time Record ************************
-            // select Time from dropdown List
+        public void SelectTimeTypeCode(IWebDriver driver)
+        {
             IWebElement typeCodeDropdown = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[2]/span"));
             typeCodeDropdown.Click();
+            IWebElement option = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
             Thread.Sleep(1000);
-            
-            IWebElement timeOption = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
-            timeOption.Click();
-            
-            // input code
+            option.Click();
+        }
+
+        public void EnterTimeCode(IWebDriver driver)
+        {
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
             codeTextbox.SendKeys("3ES");
-            
-            // input description
+        }
+        public void EnterTimedescription(IWebDriver driver)
+        {
             IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
             descriptionTextbox.SendKeys("RAJA");
-            
-            // input price per unit
+        }
+
+        public void EnterTimePrice(IWebDriver driver)
+        {
             IWebElement priceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
             priceTextbox.SendKeys("66");
             Thread.Sleep(2000);
-           
-            // click on save button
-            IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
-            saveButton.Click();
-            
-            // check Time Record created successfully
-            Console.WriteLine("Record saved successfully...");
-
-            // navige to last page
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 6);
-
-            IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+        }
+        public void SaveRecord(IWebDriver driver)
+        {
+            IWebElement saveRecord = driver.FindElement(By.Id("SaveButton"));
+            saveRecord.Click();
+            Thread.Sleep(4000);
+        }
+        public void GoToLastPage(IWebDriver driver)
+        {
+            IWebElement goToLastPageButton = driver.FindElement(By.XPath("//span[@class='k-icon k-i-seek-e']"));
             goToLastPageButton.Click();
             Thread.Sleep(4000);
-            
-            //=======check if the Time record is present in the table======
-            IWebElement newcode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+        }
+
+        //*************** Check Time Record present in the Table**********
+        public void VerifyTimeecordCreation(IWebDriver driver)
+        {
+            //check if the record is present in the table
+            IWebElement newcode = driver.FindElement(By.XPath("//tbody/tr[5]/td[1]"));
             if (newcode.Text == "3ES")
             {
-                Console.WriteLine("Time record has created succesfully");
+                Assert.Pass("Time record has created succesfully");
             }
             else
             {
-                Console.WriteLine("Time record has not been created successfully");
-            }
-        }
-        public void CreateMaterial(IWebDriver driver)
-        {
-            // ======================= Create Material Record ======================= 
-            IWebElement createnewButton4Material = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
-            createnewButton4Material.Click();
-            
-            // select dropdown List
-            IWebElement typeCodeDropdown4Material = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[2]/span"));
-            typeCodeDropdown4Material.Click();
-           
-            // select Material from dropdown List
-            Thread.Sleep(1000);
-            IWebElement createM = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[1]"));
-            createM.Click();
-
-            // input code
-            IWebElement mcodeTextbox = driver.FindElement(By.Id("Code"));
-            mcodeTextbox.SendKeys("MAT");
-            
-            // input description
-            IWebElement mdescriptionTextbox = driver.FindElement(By.Id("Description"));
-            mdescriptionTextbox.SendKeys("ESP");
-            // input price per unit
-            IWebElement mpriceTextbox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            mpriceTextbox.SendKeys("2479");
-            Thread.Sleep(2000);
-            
-            // click on save button
-            IWebElement msaveButton = driver.FindElement(By.Id("SaveButton"));
-            msaveButton.Click();
-
-            // check material record saved
-            Console.WriteLine("Material record saved...");
-            Thread.Sleep(3000);
-            IWebElement GoToLastPageButtonAfterAddMaterial = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            GoToLastPageButtonAfterAddMaterial.Click();
-            
-            //check if the Material record is present in the table
-            IWebElement newMaterialcode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (newMaterialcode.Text == "MAT")
-            {
-                Console.WriteLine("Material record has created and verified succesfully");
-            }
-            else
-            {
-                Console.WriteLine("Material record has not been created successfully");
+                Assert.Fail("Time record has not been created successfully");
             }
         }
 
-        public void EditMaterial(IWebDriver driver)
-        {
-            // click Edit the last  Record
-            IWebElement lastmaterialRecordButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-            lastmaterialRecordButton.Click();
-            
-            IWebElement editMaterialCodeTextbox = driver.FindElement(By.Id("Code"));
-            editMaterialCodeTextbox.Clear();
-            editMaterialCodeTextbox.SendKeys("MAT20");
-
-            IWebElement editDescriptionTextbox = driver.FindElement(By.Id("Description"));
-            editDescriptionTextbox.Clear();
-            editDescriptionTextbox.SendKeys("ELAN");
-
-            IWebElement priceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            IWebElement editPriceTextbox = driver.FindElement(By.Id("Price"));
-            priceTextboxOverlap.Click();
-            editPriceTextbox.Clear();
-            priceTextboxOverlap.Click();
-            editPriceTextbox.SendKeys("100");
-            Thread.Sleep(2000);
-
-            // click on save button
-            IWebElement editMaterialSaveButton = driver.FindElement(By.Id("SaveButton"));
-            editMaterialSaveButton.Click();
-            Console.WriteLine("Editing a record is done");
-            
-            // Click last Page Button (after editing)
-            Thread.Sleep(3000);
-            IWebElement afterEditmaterialGoToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            afterEditmaterialGoToLastPageButton.Click();
-            
-            //check if the  edit record is present in the table
-            IWebElement editmCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (editmCode.Text == "MAT20")
-            {
-                Console.WriteLine("Material edit record has created and verified succesfully");
-            }
-            else
-            {
-                Console.WriteLine("Material edit record has not been created successfully");
-            }
-        }
-        public void EditTime(IWebDriver driver)
-        {
-            // click Edit Time the last Record
-            IWebElement lastRecordButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-            lastRecordButton.Click();
-            
-            IWebElement editCodeTextbox = driver.FindElement(By.Id("Code"));
-            editCodeTextbox.Clear();
-            editCodeTextbox.SendKeys("3ESPEDIT");
-
-            IWebElement editDescriptionTextbox = driver.FindElement(By.Id("Description"));
-            editDescriptionTextbox.Clear();            
-            editDescriptionTextbox.SendKeys("RAJA40");
-
-            IWebElement priceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            IWebElement editPriceTextbox = driver.FindElement(By.Id("Price"));
-            priceTextboxOverlap.Click();
-            editPriceTextbox.Clear();
-            priceTextboxOverlap.Click();
-            editPriceTextbox.SendKeys("89");
-            Thread.Sleep(2000);
-           
-            // click on save button
-            IWebElement editSaveButton = driver.FindElement(By.Id("SaveButton"));
-            editSaveButton.Click();
-            Console.WriteLine("Editing a record is done");
-            
-            // Click last Page Button (after editing Time)
-            Thread.Sleep(3000);
-            IWebElement afterEditGoToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            afterEditGoToLastPageButton.Click();
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]", 7);
-            
-            //check if the  edit Time record is present in the table
-            IWebElement editCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (editCode.Text == "3ESPEDIT")
-            {
-                Console.WriteLine("Time edit record has created and verified succesfully");
-            }
-            else
-            {
-                Console.WriteLine("Time edit record has not been created successfully");
-            }
-            
-            
-        }
-          public void DeleteLastRecord(IWebDriver driver)
-          {
-            // click delete last record
-            Wait.WaitToBeClickable(driver, "Xpath", "//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]", 5);
-
-            IWebElement deleteRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
-            deleteRecord.Click();
-            Thread.Sleep(1000);
-
-            // To Click OK in altert window
-            driver.SwitchTo().Alert().Accept();
-
-            //Check if lastrecord deleted
-            IWebElement lastRecordCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (lastRecordCode.Text == "MAT20")
-            {
-                Console.WriteLine("Record deleted successfully");
-            }
-            else
-            {
-                Console.WriteLine("Record has not deleted");
-            }
-
-            Console.WriteLine("Last record from the table has been deleted successfully.");
-          }
     }
 }

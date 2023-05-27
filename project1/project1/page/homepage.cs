@@ -12,11 +12,12 @@ namespace project1.page
     {
         public void GoToTMPage(IWebDriver driver)
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             // =========navigate to time and mateial page========
             IWebElement administrationTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
             administrationTab.Click();
             
-            Wait.WaitToBeClickable(driver, "XPath","/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a", 7);
+            Wait.WaitToBeExists(driver, "XPath","/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a", 7);
             
             IWebElement tmoptionTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             tmoptionTab.Click();
