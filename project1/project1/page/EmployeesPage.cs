@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using project1.utilities;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,15 +40,19 @@ namespace project1.page
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
         }
-        /*public void EditContact(IWebDriver driver)
+
+        public void EditContact(IWebDriver driver)
         {
             // Edit Contacts detail
             IWebElement editContact = driver.FindElement(By.Id("EditContactButton"));
             editContact.Click();
-            driver.SwitchTo().Frame(editContact);
-            Thread.Sleep(2000);
-            
+            //driver.SwitchTo().Frame("EditContact"); 
+            //Thread.Sleep(2000);
+
+            new WebDriverWait(driver, TimeSpan.FromSeconds(20)).Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.CssSelector("iframe[title='Edit Contact']")));
+
             IWebElement firstnameameTextbox = driver.FindElement(By.Id("FirstName"));
+            //firstnameameTextbox.Click();
             firstnameameTextbox.SendKeys("Test");
             
             IWebElement lastnameTextbox = driver.FindElement(By.Id("LastName"));
@@ -58,21 +64,23 @@ namespace project1.page
             IWebElement phoneTextbox = driver.FindElement(By.Id("Phone"));
             phoneTextbox.SendKeys("0123456");
 
+            Thread.Sleep(2000);
             IWebElement saveButton = driver.FindElement(By.Id("submitButton"));
             saveButton.Click();
-        }*/
+        }
         public void EnterPassword(IWebDriver driver)
         {
+            driver.SwitchTo().DefaultContent();
             // Enter Password
             IWebElement EnterPassword = driver.FindElement(By.Id("Password"));
-            EnterPassword.SendKeys("121212");
+            EnterPassword.SendKeys("Qwerty@1234");
             Thread.Sleep(1000);
         }
         public void ReTypePassword(IWebDriver driver)
         {
             //Re Enter Password
             IWebElement RetypePassword = driver.FindElement(By.Id("RetypePassword"));
-            RetypePassword.SendKeys("121212");
+            RetypePassword.SendKeys("Qwerty@1234");
             Thread.Sleep(1000);
         }
         public void CheckAdmin(IWebDriver driver)

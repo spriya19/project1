@@ -35,7 +35,7 @@ namespace project1.test
             EmployeePageObj.EnterName(driver);
             EmployeePageObj.EnterUsername(driver);
             EmployeePageObj.EnterContact(driver);
-            //EmployeePageObj.EditContact(driver);
+            EmployeePageObj.EditContact(driver);
             EmployeePageObj.EnterPassword(driver);
             EmployeePageObj.ReTypePassword(driver);
             EmployeePageObj.CheckAdmin(driver);
