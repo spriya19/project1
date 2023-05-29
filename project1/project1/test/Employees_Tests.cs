@@ -50,11 +50,25 @@ namespace project1.test
         {
             EmployeesPage EmployeePageObj = new EmployeesPage();
             EmployeePageObj.EditLastEmployee(driver);
+            EmployeePageObj.EditEmployeeDetail(driver);
+            EmployeePageObj.SaveEmployeeRecord(driver);
+            EmployeePageObj.BacktoList(driver);
+            EmployeePageObj.GoToLastPage(driver);
+            EmployeePageObj.VerifyEditEmployeeRecordCreation(driver);
+        }
+        [Test, Order(3)]
+        public void DeleteLastEmployeeRecord_Test()
+        {
+            EmployeesPage EmployeePageObj = new EmployeesPage();
+            EmployeePageObj.DeletEmployeeRecord(driver);
         }
         [TearDown]
-        public void TearDownAction()
+        public void closetestRun()
         {
             driver.Quit();
         }
+        
     }
+        
 }
+

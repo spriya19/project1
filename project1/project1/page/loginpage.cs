@@ -19,7 +19,7 @@ namespace project1.page
             //launch turnup portal
             driver.Navigate().GoToUrl(" http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
             driver.Manage().Window.Maximize();
-            Thread.Sleep(4000);
+            Thread.Sleep(2000);
 
             Wait.WaitToExist(driver, "Id", "UserName", 3);
 

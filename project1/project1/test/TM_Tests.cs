@@ -8,8 +8,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace project1.test
 {
+    [Parallelizable]
     [TestFixture]
-    //[Parallelizable]
+    
     public class TM_Tests : CommonDriver
     {
         [SetUp]

@@ -6,12 +6,13 @@ using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace project1.page
 {
-    public class EmployeesPage:CommonDriver
+    public class EmployeesPage : CommonDriver
     {
         public void ClickCreateNew(IWebDriver driver)
         {
@@ -54,13 +55,13 @@ namespace project1.page
             IWebElement firstnameameTextbox = driver.FindElement(By.Id("FirstName"));
             //firstnameameTextbox.Click();
             firstnameameTextbox.SendKeys("Test");
-            
+
             IWebElement lastnameTextbox = driver.FindElement(By.Id("LastName"));
             lastnameTextbox.SendKeys("Project");
-            
+
             IWebElement preferednameTextbox = driver.FindElement(By.Id("PreferedName"));
             preferednameTextbox.SendKeys("Jet");
-            
+
             IWebElement phoneTextbox = driver.FindElement(By.Id("Phone"));
             phoneTextbox.SendKeys("0123456");
 
@@ -96,12 +97,12 @@ namespace project1.page
             IWebElement VehicleName = driver.FindElement(By.Name("VehicleId_input"));
             VehicleName.SendKeys("TESLA");
             Thread.Sleep(1000);
-        }  
-       /* public void SelectGroup(IWebDriver driver)
-        {
-            IWebElement groupTextbox = driver.FindElement(By.XPath("//div[@class='k-multiselect-wrap k-floatwrap']"));
-            groupTextbox.Click();
-        }*/
+        }
+        /* public void SelectGroup(IWebDriver driver)
+         {
+             IWebElement groupTextbox = driver.FindElement(By.XPath("//div[@class='k-multiselect-wrap k-floatwrap']"));
+             groupTextbox.Click();
+         }*/
         public void SaveEmployeeRecord(IWebDriver driver)
         {
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
@@ -118,22 +119,22 @@ namespace project1.page
         {
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[4]/a[4]/span"));
             goToLastPageButton.Click();
-            Thread.Sleep(4000);                
+            Thread.Sleep(4000);
         }
         //*************** Check Employee Record present in the Table**********
-         public void VerifyEmployeeRecordCreation(IWebDriver driver)
-         {
-             //check if the record is present in the table
-             IWebElement name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-             if (name.Text == "Project")
-             {
-                 Assert.Pass("Employee record has created succesfully");
-             }
-             else
-             {
-                 Assert.Fail("Employee record has not been created successfully");
-             }
-         }
+        public void VerifyEmployeeRecordCreation(IWebDriver driver)
+        {
+            //check if the record is present in the table
+            IWebElement name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            if (name.Text == "Project")
+            {
+                Assert.Pass("Employee record has created succesfully");
+            }
+            else
+            {
+                Assert.Fail("Employee record has not been created successfully");
+            }
+        }
         public void EditLastEmployee(IWebDriver driver)
         {
             // Navigate to Last Page
@@ -141,24 +142,54 @@ namespace project1.page
             goToLastPageButton.Click();
             Thread.Sleep(4000);
 
+             IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[3]/a[1]"));
+             editButton.Click();
+             Thread.Sleep(3000);
+           
+        }
+        public void EditEmployeeDetail(IWebDriver driver)
+        {
+            IWebElement editname = driver.FindElement(By.Id("Name"));
+            editname.Clear();
+            editname.SendKeys("Japan");
 
-
-            //Check if last record present in the table                  
-            IWebElement lastname = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (lastname.Text == "Project")
+            IWebElement editusername = driver.FindElement(By.Id("Username"));
+            editusername.Clear();
+            editusername.SendKeys("Japan55");
+        }
+        //*************** Check Edit Employee Record present in the Table**********
+        public void VerifyEditEmployeeRecordCreation(IWebDriver driver)
+        {
+            //check if the record is present in the table
+            IWebElement editname = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            if (editname.Text == "Japan")
             {
-                Thread.Sleep(2000);
-                IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[3]/a[1]"));
-                editButton.Click();
-                Thread.Sleep(3000);
+                Assert.Pass("Employee record has created succesfully");
             }
             else
             {
-
-                Assert.Fail("New record created has not been found");
-
+                Assert.Fail("Employee record has not been created successfully");
             }
+            
+        }
+        public void DeletEmployeeRecord(IWebDriver driver)
+        {
+            Thread.Sleep(2000);
+            IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[4]/a[4]/span"));
+            goToLastPageButton.Click();
 
+
+            // click delete last record
+            Thread.Sleep(3000);
+            IWebElement deletelastEmployeeRecord = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[5]/td[3]/a[2]"));
+            deletelastEmployeeRecord.Click();
+            Thread.Sleep(3000);
+
+            // To Click OK in altert window
+            driver.SwitchTo().Alert().Accept();
+
+            IWebElement lastEmployeeName = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[5]/td[1]"));
+            Console.WriteLine("Employee Last record has been deleted successfully");
         }
     }
 }
