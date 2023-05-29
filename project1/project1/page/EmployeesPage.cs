@@ -121,18 +121,18 @@ namespace project1.page
             Thread.Sleep(5000);                
         }
         //*************** Check Employee Record present in the Table**********
-       /* public void VerifyEmployeeRecordCreation(IWebDriver driver)
-        {
-            //check if the record is present in the table
-            IWebElement name = driver.FindElement(By.XPath("//td[normalize-space()='ss']"));
-            if (name.Text == "Project")
-            {
-                Assert.Pass("Employee record has created succesfully");
-            }
-            else
-            {
-                Assert.Fail("Employee record has not been created successfully");
-            }
-        }*/
+         public void VerifyEmployeeRecordCreation(IWebDriver driver)
+         {
+             //check if the record is present in the table
+             IWebElement name = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+             if (name.Text == "Project")
+             {
+                 Assert.Pass("Employee record has created succesfully");
+             }
+             else
+             {
+                 Assert.Fail("Employee record has not been created successfully");
+             }
+         }
     }
 }

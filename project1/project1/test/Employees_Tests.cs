@@ -43,7 +43,7 @@ namespace project1.test
             EmployeePageObj.SaveEmployeeRecord(driver);
             EmployeePageObj.BacktoList(driver);
             EmployeePageObj.GoToLastPage(driver);
-           // EmployeePageObj.VerifyEmployeeRecordCreation(driver);
+            EmployeePageObj.VerifyEmployeeRecordCreation(driver);
         }
         [TearDown]
         public void TearDownAction()
