@@ -118,7 +118,7 @@ namespace project1.page
         {
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[4]/a[4]/span"));
             goToLastPageButton.Click();
-            Thread.Sleep(5000);                
+            Thread.Sleep(4000);                
         }
         //*************** Check Employee Record present in the Table**********
          public void VerifyEmployeeRecordCreation(IWebDriver driver)
@@ -134,5 +134,31 @@ namespace project1.page
                  Assert.Fail("Employee record has not been created successfully");
              }
          }
+        public void EditLastEmployee(IWebDriver driver)
+        {
+            // Navigate to Last Page
+            IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[4]/a[4]/span"));
+            goToLastPageButton.Click();
+            Thread.Sleep(4000);
+
+
+
+            //Check if last record present in the table                  
+            IWebElement lastname = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            if (lastname.Text == "Project")
+            {
+                Thread.Sleep(2000);
+                IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[3]/a[1]"));
+                editButton.Click();
+                Thread.Sleep(3000);
+            }
+            else
+            {
+
+                Assert.Fail("New record created has not been found");
+
+            }
+
+        }
     }
 }

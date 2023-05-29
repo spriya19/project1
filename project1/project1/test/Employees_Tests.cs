@@ -27,7 +27,7 @@ namespace project1.test
             homepageObj.GoToEmployeesPage(driver);
         }
         [Test, Order(1)]
-        public void CreateEmployee_Test()
+        public void CreateEmployeeRecord_Test()
         {
             // Employee pageobject identified and create Employee record
             EmployeesPage EmployeePageObj = new EmployeesPage();
@@ -44,6 +44,12 @@ namespace project1.test
             EmployeePageObj.BacktoList(driver);
             EmployeePageObj.GoToLastPage(driver);
             EmployeePageObj.VerifyEmployeeRecordCreation(driver);
+        }
+        [Test, Order(2)]
+        public void EditLastEmployeeRecord_Test()
+        {
+            EmployeesPage EmployeePageObj = new EmployeesPage();
+            EmployeePageObj.EditLastEmployee(driver);
         }
         [TearDown]
         public void TearDownAction()
