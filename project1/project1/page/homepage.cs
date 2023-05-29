@@ -10,6 +10,21 @@ namespace project1.page
 {
     public class Homepage
     {
+        public void GoToEmployeesPage(IWebDriver driver)
+        {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            // Navigate to Employees page
+            IWebElement administrationTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
+            administrationTab.Click();
+            Thread.Sleep(2000);
+            
+            Wait.WaitToBeExists(driver, "XPath", "/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a", 7);
+           
+            IWebElement employeesTab = driver.FindElement(By.XPath("//a[normalize-space()='Employees']"));
+            employeesTab.Click();
+
+
+        }
         public void GoToTMPage(IWebDriver driver)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
