@@ -181,14 +181,14 @@ namespace project1.page
 
             // click delete last record
             Thread.Sleep(3000);
-            IWebElement deletelastEmployeeRecord = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[5]/td[3]/a[2]"));
+            IWebElement deletelastEmployeeRecord = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[3]/a[2]"));
             deletelastEmployeeRecord.Click();
             Thread.Sleep(3000);
 
             // To Click OK in altert window
             driver.SwitchTo().Alert().Accept();
 
-            IWebElement lastEmployeeName = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[5]/td[1]"));
+            IWebElement lastEmployeeName = driver.FindElement(By.XPath("//*[@id=\"usersGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
             Console.WriteLine("Employee Last record has been deleted successfully");
         }
     }

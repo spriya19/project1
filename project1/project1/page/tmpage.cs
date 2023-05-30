@@ -26,6 +26,7 @@ namespace project1.page
             typeCodeDropdown.Click();
             IWebElement option = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
             Thread.Sleep(1000);
+     
             option.Click();
         }
 
