@@ -9,6 +9,6 @@ namespace project1.utilities
 {
     public class CommonDriver
     {
-        public static IWebDriver driver;
+        public  IWebDriver driver;
     }
 }
