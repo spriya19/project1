@@ -65,10 +65,10 @@ namespace project1.test
             Thread.Sleep(4000);
             TimePageObj.VerifyEditTimeRecordCreation(driver);
             */
-            TimePageObj.EditLastRecord(driver);
+           // TimePageObj.EditLastRecord(driver);
         }
-        [Test, Order(3)]
-        public void CreateMaterialRecord_Test()
+       // [Test, Order(3)]
+        /*public void CreateMaterialRecord_Test()
         {
             // Materialpage object identified and create material record
             TMPage MaterialPageObj = new TMPage();
@@ -79,9 +79,9 @@ namespace project1.test
             MaterialPageObj.EnterMaterialPrice(driver);
             MaterialPageObj.SaveRecord(driver);
             MaterialPageObj.GoToLastPage(driver);
-            MaterialPageObj.VerifyMaterialRecordCreation(driver);
-        }
-        [Test, Order(4)]
+            
+        }*/
+        [Test, Order(3)]
         public void DeleteTM_Test()
         {
             //DeleteTM Record

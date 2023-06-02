@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using project1.page;
@@ -47,6 +48,8 @@ namespace project1.StepDefinitions
             TimePageObj.EnterTimedescription(driver);
             TimePageObj.EnterTimePrice(driver);
             TimePageObj.SaveRecord(driver);
+            TimePageObj.GoToLastPage(driver);
+
 
         }
 
@@ -54,8 +57,32 @@ namespace project1.StepDefinitions
         public void ThenTimeAndMaterialRecordHasCreatedSuccessfully()
         {
             TMPage TimePageObj = new TMPage();
-            TimePageObj.GoToLastPage(driver);
-            TimePageObj.VerifyTimeRecordCreation(driver);
+            string newcode = TimePageObj.GetCode(driver);
+            string newDescription = TimePageObj.GetDescription(driver);
+            string newPrice = TimePageObj.GetPrice(driver);
+
+            Assert.AreEqual("3ES",newcode, "Actual code and expected code do not match");
+            Assert.AreEqual("RAJA",newDescription, "Actual Description and expected code do not match");
+            Assert.AreEqual("$66.00",newPrice, "Actual price and Expected price code do not match");
+        }
+        [When(@"I update '([^']*)', '([^']*)' and '([^']*)' an Existing Time and material record")]
+        public void WhenIUpdateAndAnExistingTimeAndMaterialRecord(string Code, string Description , string Price)
+        {
+            TMPage TimePageObj = new TMPage();
+            TimePageObj.EditTMRecord(driver, Code,Description,Price);
+
+        }
+        [Then(@"The record should be updated '([^']*)','([^']*)' and '([^']*)'")]
+        public void ThenTheRecordShouldBeUpdatedAnd(string Code, string Description, string Price)
+        {
+                TMPage TimePageObj = new TMPage();
+                string editedCode = TimePageObj.GetEditedCode(driver);
+                string editedDescription = TimePageObj.GetEditedDescription(driver);
+                string editedPrice = TimePageObj.GetEditedPrice(driver);
+
+            Assert.AreEqual(Code, editedCode, "Actual EditedCode and Expected EditedCode do not Match");
+            Assert.AreEqual(Description, editedDescription, "Actual EditedDescription and Expected EditedDescription do not Match");
+            Assert.AreEqual(Price, editedPrice, "Actual EditedPrice and Expected EditedPrice do not Match");
         }
     }
 }

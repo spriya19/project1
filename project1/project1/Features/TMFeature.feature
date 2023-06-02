@@ -10,5 +10,16 @@ Scenario: Create Time and Material Record with vaild Details
 	When  I Navigated to GoToTMPage
     And   I Create new Time and Material record
 	Then  Time and Material Record has Created Successfully
-
-
+	
+	
+	
+Scenario Outline: Edit Existing time and material record with vaild details
+            Given I Logged in TrunupProtal Successfully
+            When  I Navigated to GoToTMPage
+			And   I update '<Code>', '<Description>' and '<Price>' an Existing Time and material record
+			Then  The record should be updated '<Code>','<Description>' and '<Price>'
+Examples:
+	| Code  | Description | Price     |
+	| March | Television  | $800.00  |
+	| April | Keyboard    | $200.00   |
+	| May   | Remote      | $85.00    |

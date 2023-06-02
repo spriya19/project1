@@ -106,6 +106,45 @@ this.ScenarioInitialize(scenarioInfo);
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Edit Existing time and material record with vaild details")]
+        [NUnit.Framework.TestCaseAttribute("March", "Television", "$800.00", null)]
+        [NUnit.Framework.TestCaseAttribute("April", "Keyboard", "$200.00", null)]
+        [NUnit.Framework.TestCaseAttribute("May", "Remote", "$85.00", null)]
+        public void EditExistingTimeAndMaterialRecordWithVaildDetails(string code, string description, string price, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Code", code);
+            argumentsOfScenario.Add("Description", description);
+            argumentsOfScenario.Add("Price", price);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit Existing time and material record with vaild details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 17
+            testRunner.Given("I Logged in TrunupProtal Successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+            testRunner.When("I Navigated to GoToTMPage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
+   testRunner.And(string.Format("I update \'{0}\', \'{1}\' and \'{2}\' an Existing Time and material record", code, description, price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 20
+   testRunner.Then(string.Format("The record should be updated \'{0}\',\'{1}\' and \'{2}\'", code, description, price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

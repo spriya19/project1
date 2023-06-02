@@ -106,17 +106,7 @@ namespace project1.page
             editDescription.Clear();
             editDescription.SendKeys("RAJA40");
         }
-        public void EditTimePriceValue(IWebDriver driver)
-        {
-            //clear price value and update new value
-            IWebElement editPriceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            IWebElement editPrice = driver.FindElement(By.Id("Price"));
-            editPriceTextboxOverlap.Click();
-            editPrice.Clear();
-            editPriceTextboxOverlap.Click();
-            editPrice.SendKeys("89");
-            Thread.Sleep(3000);
-        }
+       
         public void VerifyEditTimeRecordCreation(IWebDriver driver)
         {
             //check if the record is present in the table
@@ -156,22 +146,22 @@ namespace project1.page
             priceTextbox.SendKeys("24");
             Thread.Sleep(2000);
         }
-
-        //*************** Check Material Record present in the Table**********
-        public void VerifyMaterialRecordCreation(IWebDriver driver)
-        {
-            //check if the record is present in the table
+       public string GetCode(IWebDriver driver)
+       {
             IWebElement newcode = driver.FindElement(By.XPath("//tbody/tr[last()]/td[1]"));
-            if (newcode.Text == "MAT")
-            {
-                Assert.Pass("Material record has created succesfully");
-            }
-            else
-            {
-                Assert.Fail("Material record has not been created successfully");
-            }
+            return newcode.Text;
+       }
+        public string GetDescription(IWebDriver driver) 
+        {
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
         }
-        public void EditLastRecord(IWebDriver driver)
+        public string GetPrice(IWebDriver driver) 
+        {
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
+        }
+        public void EditTMRecord(IWebDriver driver, string Code, string Description, string Price)
         {
             Thread.Sleep(2000);
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("/html/body/div[4]/div/div/div[4]/a[4]/span"));
@@ -182,11 +172,21 @@ namespace project1.page
 
             IWebElement editCode = driver.FindElement(By.Id("Code"));
             editCode.Clear();
-            editCode.SendKeys("EDITCODE");
+            editCode.SendKeys(Code);
 
             IWebElement editDescription = driver.FindElement(By.Id("Description"));
             editDescription.Clear();
-            editDescription.SendKeys("EDITDESC");
+            editDescription.SendKeys(Description);
+            
+           
+           IWebElement editPriceTextboxOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
+           IWebElement editPrice = driver.FindElement(By.Id("Price"));
+           editPriceTextboxOverlap.Click();
+           editPrice.Clear();
+           editPriceTextboxOverlap.Click();
+           editPrice.SendKeys(Price);
+           Thread.Sleep(3000);
+            
 
             IWebElement saveRecord = driver.FindElement(By.Id("SaveButton"));
             saveRecord.Click();
@@ -195,16 +195,33 @@ namespace project1.page
             IWebElement goToLastPage = driver.FindElement(By.XPath("/html/body/div[4]/div/div/div[4]/a[4]/span"));
             goToLastPage.Click();
 
-            //check if the Edit record is present in the table
-            IWebElement editcode = driver.FindElement(By.XPath("//tbody/tr[last()]/td[1]"));
-            if (editcode.Text == "EDITCODE")
-            {
-                Assert.Pass("Edit last record has created succesfully");
-            }
-            else
-            {
-                Assert.Fail("Edit last record has not been created successfully");
-            }
+            /* //check if the Edit record is present in the table
+             IWebElement editcode = driver.FindElement(By.XPath("//tbody/tr[last()]/td[1]"));
+             if (editcode.Text == "EDITCODE")
+             {
+                 Assert.Pass("Edit last record has created succesfully");
+             }
+             else
+             {
+                 Assert.Fail("Edit last record has not been created successfully");
+             }*/
+        }
+        public string GetEditedCode(IWebDriver driver)
+        {
+            IWebElement Createcode = driver.FindElement(By.XPath("//tbody/tr[last()]/td[1]"));
+            return Createcode.Text;
+
+        }
+        public string GetEditedDescription(IWebDriver driver)
+        {
+            IWebElement CreateDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return CreateDescription.Text;
+
+        }
+        public string GetEditedPrice(IWebDriver driver)
+        {
+            IWebElement CreatePrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return CreatePrice.Text;
 
         }
         public void DeletTMRecord(IWebDriver driver)
