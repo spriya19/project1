@@ -224,7 +224,7 @@ namespace project1.page
             return CreatePrice.Text;
 
         }
-        public void DeletTMRecord(IWebDriver driver)
+        public void DeleteTMRecord(IWebDriver driver, string Code, string Description, string Price)
         {
             Thread.Sleep(2000);
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("/html/body/div[4]/div/div/div[4]/a[4]/span"));
@@ -245,6 +245,24 @@ namespace project1.page
             
             IWebElement lastRecordCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
             Assert.That(lastRecordCode.Text != "EDITCODE", "Record has  been deleted");
+
+        }
+        public string GetDeleteEditedCode(IWebDriver driver)
+        {
+            IWebElement Editedcode = driver.FindElement(By.XPath("//tbody/tr[last()]/td[1]"));
+            return Editedcode.Text;
+
+        }
+        public string GetDeleteEditedDescription(IWebDriver driver)
+        {
+            IWebElement EditedDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return EditedDescription.Text;
+
+        }
+        public string GetDeleteEditedPrice(IWebDriver driver)
+        {
+            IWebElement EditedPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return EditedPrice.Text;
 
         }
     }

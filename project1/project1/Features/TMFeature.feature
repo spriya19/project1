@@ -20,6 +20,17 @@ Scenario Outline: Edit Existing time and material record with vaild details
 			Then  The record should be updated '<Code>','<Description>' and '<Price>'
 Examples:
 	| Code  | Description | Price     |
-	| March | Television  | $800.00  |
+	| March | Television  | $800.00   |
 	| April | Keyboard    | $200.00   |
 	| May   | Remote      | $85.00    |
+
+Scenario Outline: Delete Existing time and material record with vaild details
+            Given I Logged in TrunupProtal Successfully
+            When  I Navigated to GoToTMPage
+			And   I delete '<Code>','<Description>' and'<Price>' an Existing Time and Material record
+			Then  The Record should be deleted '<Code>','<Description>',and '<Price>'
+
+Examples:
+	| Code  | Description | Price   |
+	| March | Television  | $800.00 |
+

@@ -86,7 +86,6 @@ namespace project1.test
         {
             //DeleteTM Record
             TMPage TMPageObj = new TMPage();
-            TMPageObj.DeletTMRecord(driver);
 
         }
 

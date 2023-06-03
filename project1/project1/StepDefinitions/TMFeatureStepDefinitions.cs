@@ -84,5 +84,26 @@ namespace project1.StepDefinitions
             Assert.AreEqual(Description, editedDescription, "Actual EditedDescription and Expected EditedDescription do not Match");
             Assert.AreEqual(Price, editedPrice, "Actual EditedPrice and Expected EditedPrice do not Match");
         }
+        [When(@"I delete '([^']*)','([^']*)' and'([^']*)' an Existing Time and Material record")]
+        public void WhenIDeleteAndAnExistingTimeAndMaterialRecord(string Code, string Description, string Price)
+        {
+            TMPage TimePageObj = new TMPage();
+            TimePageObj.DeleteTMRecord(driver, Code, Description, Price);
+        }
+        [Then(@"The Record should be deleted '([^']*)','([^']*)',and '([^']*)'")]
+        public void ThenTheRecordShouldBeDeletedAnd(string Code, string Description, string Price)
+        {
+            TMPage TimePageObj = new TMPage();
+            TimePageObj.DeleteTMRecord(driver, Code, Description, Price);
+            string DeletedCode = TimePageObj.GetDeleteEditedCode(driver);
+            string DeletedDescription = TimePageObj.GetDeleteEditedDescription(driver);
+            string DeletedPrice = TimePageObj.GetDeleteEditedPrice(driver);
+
+            Assert.AreNotEqual(Code, DeletedCode, "Actual Deleted code and Expected Deleted code do not match");
+            Assert.AreNotEqual(Description, DeletedDescription, "Actual Deleted code and Expected Deleted code do not match");
+            Assert.AreNotEqual(Price, DeletedPrice, "Actual DeletedPrice and Expected DeletedPrice do not Match");
+        }
     }
+
 }
+
