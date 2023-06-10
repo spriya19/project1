@@ -24,12 +24,9 @@
 					}
 				},
 				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/employees",
-					"protocol": "https",
+					"raw": "{{dummyUrl}}/api/v1/employees",
 					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
+						"{{dummyUrl}}"
 					],
 					"path": [
 						"api",
@@ -42,94 +39,11 @@
 		},
 		{
 			"name": "Get a Employee data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/employee/10",
-					"protocol": "https",
-					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"employee",
-						"10"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create a new Employee",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":  \"prabu\",\r\n    \"job\" :  \"designer\",\r\n    \"age\" :\"33\",\r\n    \"location\":\"india\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/create",
-					"protocol": "https",
-					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"create"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Updated Existing new Employee",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":  \"prabu\",\r\n    \"job\" :  \"Developer\",\r\n    \"age\" :\"33\",\r\n    \"location\":\"london\" \r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/update/7261",
-					"protocol": "https",
-					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"update",
-						"7261"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete an Existing employee data",
-			"request": {
-				"method": "DELETE",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -141,18 +55,15 @@
 					}
 				},
 				"url": {
-					"raw": "https://dummy.restapiexample.com/api/v1/delete/7261",
-					"protocol": "https",
+					"raw": "{{dummyUrl}}/api/v1/employee/10",
 					"host": [
-						"dummy",
-						"restapiexample",
-						"com"
+						"{{dummyUrl}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"delete",
-						"7261"
+						"employee",
+						"10"
 					]
 				}
 			},

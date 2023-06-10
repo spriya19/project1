@@ -23,9 +23,7 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.name).to.eql(\"Guru\");\r",
 							"    pm.expect(jsonData.job).to.eql(\"web Developer\");\r",
-							"    pm.expect(jsonData.age).to.eql(\"38\");\r",
-							"\r",
-							"     pm.environment.set(\"userID\", \"json.id\");\r",
+							"    pm.environment.set(\"userID\", jsonData.id);\r",
 							"});\r",
 							""
 						],
@@ -38,7 +36,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Guru\",\r\n    \"job\" : \"web Developer\",\r\n    \"age\" : \"38\"\r\n\r\n}",
+					"raw": "{\r\n    \"name\": \"Guru\",\r\n    \"job\" : \"web Developer\"\r\n    \r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -46,13 +44,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/api/{{userID}}",
+					"raw": "{{baseUrl}}/api/users",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
-						"{{userID}}"
+						"users"
 					]
 				}
 			},
@@ -75,7 +73,6 @@
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.name).to.eql(\"Guru\");\r",
 							"    pm.expect(jsonData.job).to.eql(\"Automation Tester\");\r",
-							"    pm.expect(jsonData.age).to.eql(\"38\");\r",
 							"\r",
 							"});\r",
 							""
@@ -89,7 +86,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Guru\",\r\n    \"job\" : \"Automation Tester\",\r\n    \"age\" : \"38\"\r\n\r\n}",
+					"raw": "{\r\n    \"name\": \"Guru\",\r\n    \"job\" : \"Automation Tester\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -41,6 +41,24 @@
 							"    pm.expect(jsonData.data[3].last_name).to.eql(\"Holt\");\r",
 							"    pm.expect(jsonData.data[4].last_name).to.eql(\"Morris\");\r",
 							"    pm.expect(jsonData.data[5].last_name).to.eql(\"Ramos\");\r",
+							"});\r",
+							"pm.test(\"Email Check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].email).to.eql(\"george.bluth@reqres.in\");\r",
+							"    pm.expect(jsonData.data[1].email).to.eql(\"janet.weaver@reqres.in\");\r",
+							"    pm.expect(jsonData.data[2].email).to.eql(\"emma.wong@reqres.in\");\r",
+							"    pm.expect(jsonData.data[3].email).to.eql(\"eve.holt@reqres.in\");\r",
+							"    pm.expect(jsonData.data[4].email).to.eql(\"charles.morris@reqres.in\");\r",
+							"    pm.expect(jsonData.data[5].email).to.eql(\"tracey.ramos@reqres.in\");\r",
+							"});\r",
+							"pm.test(\"Avatar Check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data[0].avatar).to.eql(\"https://reqres.in/img/faces/1-image.jpg\");\r",
+							"    pm.expect(jsonData.data[1].avatar).to.eql(\"https://reqres.in/img/faces/2-image.jpg\");\r",
+							"    pm.expect(jsonData.data[2].avatar).to.eql(\"https://reqres.in/img/faces/3-image.jpg\");\r",
+							"    pm.expect(jsonData.data[3].avatar).to.eql(\"https://reqres.in/img/faces/4-image.jpg\");\r",
+							"    pm.expect(jsonData.data[4].avatar).to.eql(\"https://reqres.in/img/faces/5-image.jpg\");\r",
+							"    pm.expect(jsonData.data[5].avatar).to.eql(\"https://reqres.in/img/faces/6-image.jpg\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -77,15 +95,25 @@
 		},
 		{
 			"name": "Get a single user data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://reqres.in/api/users/1",
-					"protocol": "https",
+					"raw": "{{baseUrl}}/api/users/1",
 					"host": [
-						"reqres",
-						"in"
+						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
